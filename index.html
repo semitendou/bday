@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mum! 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+            .screen.active {
+                display: flex;
+            }
+
+        /* Screen 1 */
+        #screen1 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #e91e63;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Screen 2 */
+        #screen2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+        }
+
+        .birthday-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Screen 3 */
+        #screen3 {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            overflow-y: auto;
+            padding: 60px 20px 120px 20px;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .translate-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            color: #5d4e75;
+            border: 2px solid #5d4e75;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+            .translate-btn:hover {
+                background: #5d4e75;
+                color: white;
+            }
+
+        .letter-container {
+            max-width: 600px;
+            background: rgba(255,255,255,0.9);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 40px auto 60px auto;
+        }
+
+        .letter-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            line-height: 1.8;
+            color: #5d4e75;
+            white-space: pre-line;
+            text-align: left;
+        }
+
+        /* Screen 4 */
+        #screen4 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            position: relative;
+        }
+
+        .final-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5);
+            }
+
+            to {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.8);
+            }
+        }
+
+        /* Button styles */
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-family: 'Poppins', sans-serif;
+            margin: 20px;
+        }
+
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            }
+
+        .btn-light {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #333;
+        }
+
+        /* Confetti animation */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            top: -50px;
+            font-size: 1.5rem;
+            animation: confetti-fall 4s infinite linear;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sprinkles animation */
+        .sprinkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sprinkle {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: sprinkle-twinkle 3s infinite;
+        }
+
+        @keyframes sprinkle-twinkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.3) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        /* Decorations */
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: white;
+            font-size: 1.5rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .balloons {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Screen 1 -->
+    <div class="screen active" id="screen1">
+        <h1 class="main-title">Happy Birthday Mum</h1>
+        <button class="btn" onclick="showScreen(2)">Click for good luck ✨</button>
+    </div>
+
+    <!-- Screen 2 -->
+    <div class="screen" id="screen2">
+        <div class="balloons">
+            <div class="balloon" style="left: 10%; animation-delay: 0s;">🎈</div>
+            <div class="balloon" style="left: 20%; animation-delay: -1s;">🎈</div>
+            <div class="balloon" style="right: 10%; animation-delay: -2s;">🎈</div>
+            <div class="balloon" style="right: 20%; animation-delay: -3s;">🎈</div>
+        </div>
+
+        <div class="confetti-container">
+            <div class="confetti" style="left: 5%; animation-delay: 0s;">🎊</div>
+            <div class="confetti" style="left: 15%; animation-delay: 0.5s;">🎉</div>
+            <div class="confetti" style="left: 25%; animation-delay: 1s;">🎊</div>
+            <div class="confetti" style="left: 35%; animation-delay: 1.5s;">🎉</div>
+            <div class="confetti" style="left: 45%; animation-delay: 2s;">🎊</div>
+            <div class="confetti" style="left: 55%; animation-delay: 0.3s;">🎉</div>
+            <div class="confetti" style="left: 65%; animation-delay: 0.8s;">🎊</div>
+            <div class="confetti" style="left: 75%; animation-delay: 1.3s;">🎉</div>
+            <div class="confetti" style="left: 85%; animation-delay: 1.8s;">🎊</div>
+            <div class="confetti" style="left: 95%; animation-delay: 2.3s;">🎉</div>
+        </div>
+
+        <div class="sprinkles">
+            <div class="sprinkle" style="top: 20%; left: 10%; animation-delay: 0s;">✨</div>
+            <div class="sprinkle" style="top: 30%; left: 80%; animation-delay: 0.4s;">⭐</div>
+            <div class="sprinkle" style="top: 40%; left: 15%; animation-delay: 0.8s;">✨</div>
+            <div class="sprinkle" style="top: 50%; left: 70%; animation-delay: 1.2s;">⭐</div>
+            <div class="sprinkle" style="top: 60%; left: 25%; animation-delay: 1.6s;">✨</div>
+            <div class="sprinkle" style="top: 70%; left: 85%; animation-delay: 2s;">⭐</div>
+            <div class="sprinkle" style="top: 80%; left: 35%; animation-delay: 2.4s;">✨</div>
+            <div class="sprinkle" style="top: 25%; left: 60%; animation-delay: 0.6s;">⭐</div>
+            <div class="sprinkle" style="top: 65%; left: 50%; animation-delay: 1.4s;">✨</div>
+            <div class="sprinkle" style="top: 35%; left: 90%; animation-delay: 1.8s;">⭐</div>
+        </div>
+
+        <h1 class="birthday-title">Happy 40th Birthday Mum!</h1>
+        <button class="btn" onclick="showScreen(3)">Click for a surprise 🎁</button>
+    </div>
+
+    <!-- Screen 3 -->
+    <div class="screen" id="screen3">
+        <button class="translate-btn" onclick="toggleLanguage()">中文</button>
+        <div class="letter-container">
+            <div class="letter-text" id="letterText">
+                🎉 <strong>Happy Birthday, Mum!</strong> 🎉
+
+                Thank you so much for always being so reliable — 🚗 taking me to and from school, 🍱 making me lunch, and doing so many other things that often go unnoticed.
+
+                Even though we don't always get along, I want you to know that I truly appreciate everything you do for me. 💖 I wouldn't be where I am today without your love and support.
+
+                💐 <strong>I love you so much!</strong> 💐
+            </div>
+        </div>
+        <button class="btn" onclick="showScreen(4)">One last thing… 💕</button>
+    </div>
+
+    <!-- Screen 4 -->
+    <div class="screen" id="screen4">
+        <div class="sparkles">
+            <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0s;">✨</div>
+            <div class="sparkle" style="top: 25%; left: 75%; animation-delay: 0.3s;">⭐</div>
+            <div class="sparkle" style="top: 65%; left: 10%; animation-delay: 0.6s;">✨</div>
+            <div class="sparkle" style="top: 80%; left: 80%; animation-delay: 0.9s;">⭐</div>
+            <div class="sparkle" style="top: 40%; left: 90%; animation-delay: 1.2s;">✨</div>
+            <div class="sparkle" style="top: 55%; left: 5%; animation-delay: 1.5s;">⭐</div>
+            <div class="sparkle" style="top: 30%; left: 50%; animation-delay: 1.8s;">✨</div>
+            <div class="sparkle" style="top: 70%; left: 60%; animation-delay: 2.1s;">⭐</div>
+        </div>
+        <h1 class="final-title">Love you Mum,<br>Happy Birthday! 🎉💖</h1>
+        <button class="btn btn-light" onclick="showScreen(1)">Start Over 🔄</button>
+    </div>
+
+    <script>
+        // Language toggle
+        let isEnglish = true;
+        const englishText = `🎉 <strong>Happy Birthday, Mum!</strong> 🎉
+
+Thank you so much for always being so reliable — 🚗 taking me to and from school, 🍱 making me lunch, and doing so many other things that often go unnoticed.
+
+Even though we don't always get along, I want you to know that I truly appreciate everything you do for me. 💖 I wouldn't be where I am today without your love and support.
+
+💐 <strong>I love you so much!</strong> 💐`;
+
+        const chineseText = `🎉 **生日快乐，妈妈！** 🎉
+
+非常感谢您一直以来的可靠—— 🚗 接送我上下学， 🍱 为我做午餐， 还有许多其他常常被忽略的小事。
+
+虽然我们不总是意见一致，但我想让您知道，我真的非常感激您为我做的一切。💖 没有您的爱和支持，我不会有今天的自己。
+
+💐 **我真的非常爱您！** 💐`;
+
+        function showScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            // Show target screen
+            document.getElementById('screen' + screenNumber).classList.add('active');
+
+            console.log('Showing screen:', screenNumber);
+        }
+
+        function toggleLanguage() {
+            const letterText = document.getElementById('letterText');
+            const translateBtn = document.querySelector('.translate-btn');
+
+            if (isEnglish) {
+                letterText.innerHTML = chineseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                translateBtn.textContent = 'English';
+                isEnglish = false;
+            } else {
+                letterText.innerHTML = englishText;
+                translateBtn.textContent = '中文';
+                isEnglish = true;
+            }
+        }
+
+        // Test that everything loads
+        console.log('Birthday card loaded and ready!');
+    </script>
+</body>
+</html>
